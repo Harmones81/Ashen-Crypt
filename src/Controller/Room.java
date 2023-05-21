@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.GameDB;
 import java.util.HashMap;
 
 public class Room
@@ -10,23 +11,40 @@ public class Room
     private HashMap<String, Item> items = new HashMap<String, Item>();
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
 
+    private GameDB gameDB;
+
     public Room(int roomId, String roomName, String roomDescription)
     {
+        gameDB = new GameDB();
         this.roomId = roomId;
         this.roomName = roomName;
         this.roomDescription = roomDescription;
 
-        setItems(items);
-        setExits(exits);
+        initItems(items);
+        initExits(exits);
     }
 
-    public void setItems(HashMap<String, Item> items)
-    {
+    public int getRoomId(){ return roomId; }
+    public void setRoomId(int roomId){ this.roomId = roomId; }
+    public String getRoomName(){ return roomName; }
+    public void setRoomName(String roomName){ this.roomName = roomName; }
+    public String getRoomDescription(){ return roomDescription; }
+    public void setRoomDescription(String roomDescription){ this.roomDescription = roomDescription; }
 
+
+    private void initItems(HashMap<String, Item> items)
+    {
+        for(Item item : gameDB.getItemDB().getItems())
+        {
+            if(item.getItemLocation() == roomId)
+            {
+                items.put(item.getItemName(), item);
+            }
+        }
     }
 
-    public void setExits(HashMap<String, Exit> exits)
+    private void initExits(HashMap<String, Exit> exits)
     {
-
+        // TODO -> Finish this method
     }
 }
