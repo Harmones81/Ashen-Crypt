@@ -9,7 +9,7 @@ public class Item
 
     public Item()
     {
-
+        // empty constructor
     }
 
     public Item(int itemId, int itemLocation, String itemName, String itemDescription)
