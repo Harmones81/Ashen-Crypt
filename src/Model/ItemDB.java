@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemDB
+public class ItemDB extends DB
 {
     private static ItemDB instance;
 
