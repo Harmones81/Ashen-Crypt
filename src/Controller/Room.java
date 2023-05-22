@@ -1,27 +1,35 @@
 package Controller;
 
 import Model.GameDB;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Room
 {
     private int roomId;
     private String roomName;
     private String roomDescription;
-    private HashMap<String, Item> items = new HashMap<String, Item>();
-    private HashMap<String, Exit> exits = new HashMap<String, Exit>();
-
+    private boolean visited;
+    private ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Exit> exits = new ArrayList<Exit>();
     private GameDB gameDB;
+
+    public Room()
+    {
+        gameDB = GameDB.getInstance();
+        visited = false;
+
+        initItems(items);
+    }
 
     public Room(int roomId, String roomName, String roomDescription)
     {
-        gameDB = new GameDB();
+        gameDB = GameDB.getInstance();
         this.roomId = roomId;
         this.roomName = roomName;
         this.roomDescription = roomDescription;
+        visited = false;
 
         initItems(items);
-        initExits(exits);
     }
 
     public int getRoomId(){ return roomId; }
@@ -30,21 +38,21 @@ public class Room
     public void setRoomName(String roomName){ this.roomName = roomName; }
     public String getRoomDescription(){ return roomDescription; }
     public void setRoomDescription(String roomDescription){ this.roomDescription = roomDescription; }
+    public boolean getVisitation(){ return visited; }
+    public void setVisited(boolean visited){ this.visited = visited; }
 
+    public void addItem(Item item){ items.add(item); }
+    public void addExit(Exit exit){ exits.add(exit); }
+    public void removeItem(Item item){ items.remove(item); }
 
-    private void initItems(HashMap<String, Item> items)
+    private void initItems(ArrayList<Item> items)
     {
         for(Item item : gameDB.getItemDB().getItems())
         {
             if(item.getItemLocation() == roomId)
             {
-                items.put(item.getItemName(), item);
+                items.add(item);
             }
         }
-    }
-
-    private void initExits(HashMap<String, Exit> exits)
-    {
-        // TODO -> Finish this method
     }
 }

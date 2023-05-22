@@ -7,6 +7,11 @@ public class Item
     private String itemName;
     private String itemDescription;
 
+    public Item()
+    {
+
+    }
+
     public Item(int itemId, int itemLocation, String itemName, String itemDescription)
     {
         this.itemId = itemId;
